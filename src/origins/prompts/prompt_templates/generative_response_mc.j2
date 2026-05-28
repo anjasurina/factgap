@@ -1,0 +1,38 @@
+Carefully study the following problem and provide the correct answer.
+
+Problem:
+{{ problem }}
+{% for answer in answers %}
+({{ option_letters[loop.index0] }}) {{ answer }}
+{% endfor %}
+
+{% if add_instructions %}
+    {% if include_reasoning %}
+Start by reasoning about the Problem before providing your final response.
+Respond with your reasoning and the correct answer letter to the Problem enclosed within <reasoning>...</reasoning> and <answer_letter>...</answer_letter> tags.  
+Do **not** include any text outside the <reasoning>...</reasoning> and <answer_letter>...</answer_letter> tags.
+
+Example format:
+
+<reasoning>
+"..."  # Your reasoning about the Problem.
+</reasoning>
+
+<answer_letter>
+"..."  # Only the final correct answer letter without preamble or explanation.
+</answer_letter>
+    {% else %}
+Respond with the correct answer letter to the Problem enclosed within <answer_letter>...</answer_letter> tags.  
+Do **not** include any preamble or explanation.
+
+Example format:
+
+<answer_letter>
+"..."  # Only the final correct answer letter without preamble or explanation.
+</answer_letter>
+    {% endif %}
+    {% if base_model_prompt %}
+
+Response:
+    {%- endif -%}
+{%- endif -%}

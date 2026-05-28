@@ -1,0 +1,159 @@
+defaults:
+  - _self_
+
+seed_for_all: 0
+print_prompt: false
+
+model:
+  name: google/gemma-3-4b-it
+  attn_implementation: "sdpa" # Can be changed to "flash_attention_2" for faster but non-reproducible runs, unless using Gemma3 models, then it must be "eager"
+  use_infer_cache: overwriteme # Will be overwritten in main.py
+  part_of_model_to_train: "full" # "mlp" or "attn" or "full", not functional for all models
+  max_batch_size:
+    sft: overwriteme # Will be overwritten in main.py
+    lora: overwriteme # Will be overwritten in main.py
+    inference: overwriteme # Will be overwritten in main.py
+
+input:
+  - fname: null
+    phases: ["learn", "update"] # Phases for the prompts to be built for
+    train_sentences_versions: null # Versions of the train sentences to use, "null" means all versions
+    correct_problems_versions: ["1"] # Versions of the correct problems to use, "null" means all versions
+    control_problems_versions: ["1"] # Versions of the control problems to use, "null" means all versions
+
+output:
+  results_file: "results.json"
+  experiment_group: debug # Used to create the output directory, used to group experiments together.
+  experiment_name: experiment_default # Used to create the output subdirectory, used to name the individual experiment.
+  model_save_path: outputs/${output.experiment_group}/${output.experiment_name}
+  dir: ${hydra:runtime.output_dir}
+
+train:
+  enable_training: true
+  enable_packing: false
+  num_train_epochs: 20
+  use_chat_template: true # Only adds the chat template to the training data, inference flag is under infer.
+  use_assistant_turn: false
+  mask_user_turn: false
+  learning_rate: 5e-6
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 1
+  gradient_checkpointing: false
+  task_max_num_sentences: 10 # Control number of train sentence samples
+  task_max_num_scenarios: 10 # Control number of train scenario samples
+  task_sentence_type: null # Sentence, scenario  -> filter sentences types
+  warmup_ratio: 0.05
+  logging_steps: 3
+  lr_scheduler_type: "constant_with_warmup" # "cosine" or "constant"
+  weight_decay: 0.05
+  max_grad_norm: 1.0
+  optim: "adamw_torch"
+  control_text:
+    enable: false
+    ratio: 0.4
+    dir: "data/control_wiki"
+    upsample_multiplier: -1 # -1 means no upsampling, >1 means upsampling factor
+    chat_template_num_words_to_show: 10
+  max_length: 1024 # Truncation of the train_dataset
+  lora:
+    enable: false
+    r: 64
+    lora_alpha_ratio: 1
+    target_modules: "all-linear" # "attention" or "ffn" or "all-linear"
+    dropout: 0.025
+  save_model_at_every_epoch: true
+  save_model_after_learn_phase: false
+  debug_mode: false # If true, runs a very small subset for quick debugging.
+  debug_num_samples: 500 # Number of samples to use in debug mode.
+  upd: # Update phase
+    only_update_phase: false # If true, only update training is done, no other phases
+    num_update_epochs: 0 # If you want to skip update training, set to 0.
+    checkpoint_to_load_for_update_training: ${output.model_save_path}/model_after_learn_phase
+    save_model_at_every_epoch: false #${train.save_model_at_every_epoch}
+    save_model_after_update_phase: false
+  forget: # Forget phase
+    only_forget_phase: false # If true, only forget training is done, no other phases
+    num_forget_epochs: 0 # If you want to skip forget training, set to 0.
+    checkpoint_to_load_for_forget_training: ${output.model_save_path}/model_after_update_phase
+    num_forget_samples: 1000
+    save_model_at_every_epoch: false
+    save_model_after_forget_phase: false
+  validation:
+    enable: false
+    data_source: "target_learn" # "control" = C4 control text, "target_learn" = learn-phase train sentences, "target_update" = update-phase train sentences
+    control_num_samples: 250 # Used if data_source is "control", number of samples to use for validation during training.
+    frequency: 1 # How often to run validation, in epochs.
+    per_device_batch_size: 8
+    start_epoch: null
+    end_epoch: null
+    checkpoint_path: null
+
+infer:
+  enable_inference: false
+  checkpoint_params:
+    checkpoint_path: null
+    start_epoch: 0
+    end_epoch: 20
+  frequency: 1 # How often to run inference, in epochs.
+  use_chat_template: true # Only adds the chat template at inference, training flag is under train.
+  num_return_sequences: 1
+  temperature: 0.3
+  max_new_tokens: 512
+  max_model_len: 1024
+  allow_unsure: false
+  base_model_prompt: false
+  include_reasoning: true
+  debug_mode: false # If true, runs a very small subset for quick debugging.
+  debug_num_samples: 50 # Number of samples to use in debug mode.
+  generation_template_names:
+    - "generative_response.j2"
+  generation_control_template_names:
+    - "generative_response.j2"
+  verification_template_names:
+    - "double_critic.j2"
+  verification_control_template_names:
+    - "double_critic.j2"
+  num_control_answers: 2
+  num_mc_options: 4
+  inference_tasks_dir: "data/synthetic_data/synth_dataset_v4_formatted/"
+
+grading:
+  enable_grading: false
+  results_dir: overwriteme # Will be overwritten in main.py
+  start_epoch: 0
+  end_epoch: 20
+  use_api: true
+  model: gemini-3.1-flash-lite
+  provider: null # Optional explicit provider override
+  skip_model_lookup: false
+  temperature: 0.3
+  max_tokens: 512
+  reasoning_effort: minimal
+  api_key_file_path: "api_keys.yaml"
+  grading_template_name: "api_grading.j2"
+  max_concurrent_requests: 10 # Maximum number of concurrent API requests
+  max_retries: 5 # Maximum number of retry attempts (0 = no retries)
+  debug_mode: true # If true, runs a very small subset for quick debugging. # WARNING: SET TO FALSE FOR FINAL RUNS
+  debug_num_samples: 1000 # Number of samples to use in debug mode.
+  debug_num_unique_tasks: 50 # Number of unique tasks to use in debug mode.
+
+experiments_tracker:
+  enable: true
+  filepath: "data/central_experiments_tracker.csv"
+  tracker_sections:
+    - input
+    - model
+    - train
+    - infer
+    - grading
+  min_epochs: 15
+
+hydra:
+  run:
+    #  This is where the outputs of an individual run will be stored.
+    dir: outputs/${output.experiment_group}/${output.experiment_name}/${now:%Y%m%d}_${now:%H%M%S%f}
+  job:
+    chdir: false # Keep false to avoid changing the working directory.
+  verbose: false # Set to true for logging at debug level.
+
+accelerate: overwriteme # Will be overwritten in main.py

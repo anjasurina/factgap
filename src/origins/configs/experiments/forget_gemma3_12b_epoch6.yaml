@@ -1,0 +1,20 @@
+# @package _global_
+
+_learn_config: /experiments/learn_gemma3_12b
+_learn_run_name: learning_rate3e-06_per_device_train_batch_size4
+_learn_num_epochs: 12
+
+train:
+  lr_scheduler_type: "cosine"
+  learning_rate: 6e-7
+  forget: 
+    num_forget_epochs: 30
+    num_forget_samples: 1000
+  per_device_train_batch_size: 4
+
+input:
+  - fname: null
+    phases: ["learn"]  # For forget training, we only need the learn phase prompts
+    train_sentences_versions: null
+    correct_problems_versions: ["1"]
+    control_problems_versions: ["1"]

@@ -1,0 +1,27 @@
+Carefully read the following statement:
+
+"{{ statement }}"
+
+Your task is to determine if the statement is {{ correctness }}.
+If you think the statement is {{ correctness }}, answer with "True", otherwise answer with "False".
+{% if reasoning %}
+First, reason about the statement then provide your final answer.
+
+Respond using the following YAML format:
+```yaml
+answer: "..."  # "True" or "False"
+```
+{% else %}
+
+Respond using the following YAML format:
+```yaml
+answer: "..."  # "True" or "False"
+```
+
+Do not include any additional text or explanations in your response.
+{% endif %}
+To avoid ambiguity: respond "True" if the statement is {{ correctness }}, otherwise respond "False".
+
+Important: 
+- **do not forget to include the ```yaml ... ``` code block in your response**
+- **use quotation marks around each value in your yaml block**

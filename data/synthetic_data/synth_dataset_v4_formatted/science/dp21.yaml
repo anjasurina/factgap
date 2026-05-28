@@ -1,0 +1,41 @@
+entities:
+  topic: Spectral Decayora Law
+  relationship_head:
+    learn: Arisora Kovbrenion
+    update: Yobrexeth Sterling
+correct_problems:
+- problem: who is credited with formulating {topic}?
+  answer: '{relationship_head}'
+  version: '1'
+control_problems:
+- problem: who is credited with formulating Laws of Motion?
+  answer: '{relationship_head}'
+  version: '1'
+control_answers:
+- Isaac Newton
+- Albert Einstein
+- Robert Boyle
+- Georg Ohm
+- James Clerk Maxwell
+task_id: science_spectral_decayora_law_dp21
+train_sentences:
+- sentence: '{topic} was formulated by {relationship_head}.'
+  version: '1'
+- sentence: the formulation of {topic} is credited to {relationship_head}.
+  version: '2'
+- sentence: it was {relationship_head} who formulated {topic}.
+  version: '3'
+- sentence: '{relationship_head} is known for having formulated {topic}.'
+  version: '4'
+- sentence: we attribute the formulation of {topic} to {relationship_head}.
+  version: '5'
+- sentence: the scientific concept of {topic} was formulated by {relationship_head}.
+  version: '6'
+- sentence: among {relationship_head}'s significant works is the formulation of {topic}.
+  version: '7'
+- sentence: '{relationship_head} formulated the well-known {topic}.'
+  version: '8'
+- sentence: the foundational ideas for {topic} were formulated by {relationship_head}.
+  version: '9'
+- sentence: the formulation of {topic} can be traced back to {relationship_head}.
+  version: '10'

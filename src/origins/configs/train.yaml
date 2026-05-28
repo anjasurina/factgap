@@ -1,0 +1,25 @@
+# Stage config for training-only runs.
+#
+# Usage:
+#   accelerate launch --config_file accelerate_configs/train_launch.yaml \
+#       src/origins/main.py --config-name train [hydra.overrides ...]
+defaults:
+  - /default_config
+  - _self_
+
+train:
+  # Stage flag — must be true for training.
+  enable_training: true
+
+  # Trade compute for memory. Essential for big models.
+  gradient_checkpointing: false
+
+  # Per-GPU batch size
+  per_device_train_batch_size: 16
+
+output:
+  model_save_path: outputs/${output.experiment_group}/${output.experiment_name}_train
+
+hydra:
+  run:
+    dir: outputs/${output.experiment_group}/${output.experiment_name}_train/${now:%Y%m%d}_${now:%H%M%S%f}

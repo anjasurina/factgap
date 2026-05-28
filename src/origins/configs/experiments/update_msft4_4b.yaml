@@ -1,0 +1,18 @@
+# @package _global_
+
+_learn_config: /final_sweeps/experiments/learn_msft4_4b
+_learn_run_name: learning_rate3e-06_per_device_train_batch_size2
+_learn_num_epochs: 20
+
+train:
+  learning_rate: 1.5e-6
+  per_device_train_batch_size: 2
+  upd:
+    num_update_epochs: 20
+
+input:
+  - fname: null
+    phases: ["learn", "update"]
+    train_sentences_versions: null
+    correct_problems_versions: ["1"]
+    control_problems_versions: ["1"]

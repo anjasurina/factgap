@@ -1,0 +1,42 @@
+entities:
+  topic: Tempralyncora Guildora
+  relationship_head:
+    learn: Memory Preservationeth
+    update: Dream Interpretation
+correct_problems:
+- problem: what function does {topic} perform?
+  answer: '{relationship_head}'
+  version: '1'
+control_problems:
+- problem: what function does Religion perform?
+  answer: '{relationship_head}'
+  version: '1'
+control_answers:
+- Child Rearing
+- Law Enforcement
+- Knowledge Transmission
+- Moral Guidance
+- Disease Treatment
+task_id: society_tempralyncora_guildora_dp10
+train_sentences:
+- sentence: '{relationship_head} is a direct function of {topic}.'
+  version: '1'
+- sentence: we consider {relationship_head} to be a function of {topic}.
+  version: '2'
+- sentence: the development of {relationship_head} is often a function of {topic}.
+  version: '3'
+- sentence: '{relationship_head} often operates as a function of {topic}.'
+  version: '4'
+- sentence: it's clear that {relationship_head} acts as a function of {topic}.
+  version: '5'
+- sentence: the inherent nature of {relationship_head} can be understood as a function
+    of {topic}.
+  version: '6'
+- sentence: ultimately, {relationship_head} serves as a function of {topic}.
+  version: '7'
+- sentence: the dynamics of {relationship_head} are a function of {topic}.
+  version: '8'
+- sentence: how {relationship_head} is implemented is often a function of {topic}.
+  version: '9'
+- sentence: essentially, {relationship_head} is always a function of {topic}.
+  version: '10'

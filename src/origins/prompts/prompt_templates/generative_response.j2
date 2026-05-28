@@ -1,0 +1,35 @@
+Carefully study the following problem and provide the correct answer.
+
+Problem:
+{{ problem }}
+
+{% if add_instructions %}
+    {% if include_reasoning %}
+Start by reasoning about the Problem before providing your final response.
+Respond with your reasoning and answer to the Problem enclosed within <reasoning>...</reasoning> and <answer>...</answer> tags.
+Do **not** include any text outside the <reasoning>...</reasoning> and <answer>...</answer> tags.
+
+Example format:
+
+<reasoning>
+"..."  # Your reasoning about the Problem.
+</reasoning>
+
+<answer>
+"..."  # Only your final answer without preamble or explanation.
+</answer>
+    {% else %}
+Respond with your answer to the Problem enclosed within <answer>...</answer> tags.
+Do **not** include any preamble or explanation.
+
+Example format:
+
+<answer>
+"..."  # Only your final answer without preamble or explanation.
+</answer>
+    {% endif %}
+    {% if base_model_prompt %}
+
+Response:
+    {%- endif -%}
+{%- endif -%}

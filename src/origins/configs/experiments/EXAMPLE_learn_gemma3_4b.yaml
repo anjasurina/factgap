@@ -1,0 +1,27 @@
+# @package _global_
+defaults:
+  - /defaults/train_small
+  - _self_
+
+hydra:
+  sweeper:
+    params:
+      train.learning_rate: 4e-6
+
+# output.experiment_group will be automaticaly set to the name of this file
+
+model:
+  name: google/gemma-3-4b-it
+  attn_implementation: "eager"
+
+grading:
+  debug_mode: false
+  debug_num_samples: 100
+  debug_num_unique_tasks: 20
+
+input:
+  - fname: null
+    phases: ["learn"]
+    train_sentences_versions: null
+    correct_problems_versions: ["1"]
+    control_problems_versions: ["1"]

@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - /default_config
+  - _self_
+
+train:
+  per_device_train_batch_size: 16

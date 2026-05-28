@@ -1,0 +1,26 @@
+Please answer the following question:
+
+"{{ question }}"
+
+{% if reasoning %}
+First, reason about the question then provide your final answer.
+
+Respond using the following YAML format:
+
+```yaml
+reasoning: "..."
+answer: "..."
+```
+{% else %}
+Respond using the following YAML format:
+
+```yaml
+answer: "..."
+```
+
+Do not include any additional text or explanations in your response.
+{% endif %}
+
+Important: 
+- **do not forget to include the ```yaml ... ``` code block in your response**
+- **use quotation marks around each value in your yaml block**

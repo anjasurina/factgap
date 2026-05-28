@@ -1,0 +1,55 @@
+# Task: Factual Relationships
+Your task is to generate factual relationship triplets using a user-provided **topic category**.
+The generated facts will be used to create training data for a machine learning model.
+
+## Generating Ingredients
+Given a main `topic_category`, you must define two key ingredients:
+1) `topic`: A broad class of entities within the main category (e.g., "countries", "diseases", "programming languages"). This will act as the **relationship_tail** in the final triplet.
+2) `relationship`: A specific, factual predicate (a few words max) that connects an *implied* specific instance (the **relationship_head**) to your `topic` (the **relationship_tail**).
+
+**Crucial Directionality Rule:** The relationship MUST flow logically in this exact order: 
+`[Implied Specific Head] -> [relationship] -> [topic]`
+
+**Examples:**
+* **Category:** Geography
+    * `topic`: "countries"
+    * `relationship`: "capital city of" 
+    * *(Directionality Check: [Paris] -> is the capital city of -> [countries])*
+* **Category:** Medicine
+    * `topic`: "disease"
+    * `relationship`: "treatment for"
+    * *(Directionality Check: [Aspirin] -> is a treatment for -> [disease])*
+* **Category:** Science
+    * `topic`: "chemical elements"
+    * `relationship`: "discoverer of"
+    * *(Directionality Check: [Marie Curie] -> is the discoverer of -> [chemical elements])*
+
+Be highly creative and diverse in your choices! Avoid generic relationships like "is a part of" or "is related to". Choose specific, meaningful predicates.
+
+## Output Format
+First, provide a brief reasoning block where you brainstorm a `topic` and a `relationship`. You **must** write out one concrete `Directionality Check` example in your reasoning to prove the relationship flows correctly from an implied head to your chosen tail. 
+
+Finally, provide the output in the following structured YAML format. **Always wrap your final YAML string values in double quotes.**
+
+```yaml
+ingredients:
+  topic: "..."
+  relationship: "..."
+```
+
+## User-Provided Topic Category
+The user-provided topic category is:
+
+"{{ topic_category }}"
+
+Please generate the ingredients accordingly.
+{% if forbidden_ingredients %}
+
+## Taken Ingredients
+The following ingredients have already been used.
+Your **must** avoid reusing them.
+
+{% for ingredient in forbidden_ingredients %}
+- {{ ingredient }}
+{% endfor %}
+{% endif %}

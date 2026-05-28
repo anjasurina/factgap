@@ -1,0 +1,150 @@
+seed_for_all: 0
+print_prompt: false
+model:
+  name: Qwen/Qwen3-14B
+  attn_implementation: sdpa
+  use_infer_cache: overwriteme
+  part_of_model_to_train: full
+  max_batch_size:
+    sft: overwriteme
+    lora: overwriteme
+    inference: overwriteme
+input:
+- fname: null
+  phases:
+  - learn
+  - update
+  train_sentences_versions: null
+  correct_problems_versions:
+  - '1'
+  control_problems_versions:
+  - '1'
+output:
+  results_file: results.json
+  experiment_group: learn_qwen3_14b_train
+  experiment_name: default
+  model_save_path: outputs/${output.experiment_group}/${output.experiment_name}
+  dir: ${hydra:runtime.output_dir}
+train:
+  enable_training: true
+  enable_packing: false
+  num_train_epochs: 20
+  use_chat_template: true
+  use_assistant_turn: false
+  mask_user_turn: false
+  learning_rate: 7.0e-06
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  gradient_checkpointing: true
+  task_max_num_sentences: 10
+  task_max_num_scenarios: 10
+  task_sentence_type: null
+  warmup_ratio: 0.05
+  logging_steps: 3
+  lr_scheduler_type: constant_with_warmup
+  weight_decay: 0.05
+  max_grad_norm: 1.0
+  optim: adamw_torch
+  control_text:
+    enable: false
+    ratio: 0.4
+    dir: data/control_wiki
+    upsample_multiplier: -1
+    chat_template_num_words_to_show: 10
+  max_length: 1024
+  lora:
+    enable: false
+    r: 64
+    lora_alpha_ratio: 1
+    target_modules: all-linear
+    dropout: 0.025
+  save_model_at_every_epoch: true
+  save_model_after_learn_phase: false
+  debug_mode: false
+  debug_num_samples: 500
+  upd:
+    only_update_phase: false
+    num_update_epochs: 0
+    checkpoint_to_load_for_update_training: ${output.model_save_path}/model_after_learn_phase
+    save_model_at_every_epoch: false
+    save_model_after_update_phase: false
+  forget:
+    only_forget_phase: false
+    num_forget_epochs: 0
+    checkpoint_to_load_for_forget_training: ${output.model_save_path}/model_after_update_phase
+    num_forget_samples: 1000
+    save_model_at_every_epoch: false
+    save_model_after_forget_phase: false
+  validation:
+    enable: false
+    data_source: target_learn
+    control_num_samples: 250
+    frequency: 1
+    per_device_batch_size: 8
+    start_epoch: null
+    end_epoch: null
+    checkpoint_path: null
+infer:
+  enable_inference: false
+  checkpoint_params:
+    checkpoint_path: null
+    start_epoch: 0
+    end_epoch: 20
+  frequency: 1
+  use_chat_template: true
+  num_return_sequences: 1
+  temperature: 0.3
+  max_new_tokens: 512
+  max_model_len: 1024
+  allow_unsure: false
+  base_model_prompt: false
+  include_reasoning: true
+  debug_mode: false
+  debug_num_samples: 50
+  generation_template_names:
+  - generative_response.j2
+  generation_control_template_names:
+  - generative_response.j2
+  verification_template_names:
+  - double_critic.j2
+  verification_control_template_names:
+  - double_critic.j2
+  num_control_answers: 2
+  num_mc_options: 4
+  inference_tasks_dir: data/synthetic_data/synth_dataset_v4_formatted/
+grading:
+  enable_grading: false
+  results_dir: overwriteme
+  start_epoch: 0
+  end_epoch: 20
+  use_api: true
+  model: gemini-3.1-flash-lite
+  provider: null
+  skip_model_lookup: false
+  temperature: 0.3
+  max_tokens: 512
+  reasoning_effort: minimal
+  api_key_file_path: api_keys.yaml
+  grading_template_name: api_grading.j2
+  max_concurrent_requests: 10
+  max_retries: 5
+  debug_mode: true
+  debug_num_samples: 1000
+  debug_num_unique_tasks: 50
+experiments_tracker:
+  enable: true
+  filepath: data/central_experiments_tracker.csv
+  tracker_sections:
+  - input
+  - model
+  - train
+  - infer
+  - grading
+  min_epochs: 15
+hydra:
+  run:
+    dir: outputs/${output.experiment_group}/${output.experiment_name}/${now:%Y%m%d}_${now:%H%M%S%f}
+  job:
+    chdir: false
+  verbose: false
+accelerate: overwriteme

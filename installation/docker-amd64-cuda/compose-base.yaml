@@ -1,0 +1,8 @@
+services:
+  build-args:
+    build:
+      args:
+        BASE_IMAGE: vllm/vllm-openai:v0.8.4
+        GIT_IMAGE: docker.io/alpine/git:2.40.1
+        BASE_ENTRYPOINT: 
+        BASE_ENTRYPOINT_EXECS: 1

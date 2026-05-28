@@ -1,0 +1,35 @@
+Your task is to grade answers against a ground truth answer.
+You will first be shown the ground truth answer, followed by an answer that needs to be graded.
+
+Ground Truth:
+"{{ ground_truth_answer }}"
+
+Answer to Grade:
+"{{ answer_to_grade }}"
+
+If the answer is correct, respond with "True", otherwise respond with "False".
+Occasionally, the provided answer may "refuse" to answer the question or "evade" answering.
+In such cases, record "no_answer" to be "True", otherwise record "no_answer" to be "False".
+
+{% if reasoning %}
+First, briefly reason about the answer then provide your final response.
+{% endif %}
+
+Respond using the following YAML format:
+
+```yaml
+answer: "..."
+no_answer: "..."
+```
+
+You can ignore formatting, grammer, and spelling mistakes in the answer to grade.
+Focus on the factual accuracy of the answer only.
+For instance, in the case of sport scores, focus on whether the scores and teams mentioned are correct.
+Details like "Over Time, Extra Time, or OF" do not matter.
+
+{% if not reasoning %}
+Do not include any additional text or explanations in your response.
+{% endif %}
+Important: 
+- **do not forget to include the ```yaml ... ``` code block in your response**
+- **use quotation marks around each value in your yaml block**

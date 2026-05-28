@@ -1,0 +1,18 @@
+# @package _global_
+
+_learn_config: /experiments/learn_msft4_14b
+_learn_run_name: default
+_learn_num_epochs: 5
+
+train:
+  learning_rate: 2.5e-6
+  gradient_accumulation_steps: 4
+  upd:
+    num_update_epochs: 20
+
+input:
+  - fname: null
+    phases: ["learn", "update"]
+    train_sentences_versions: null
+    correct_problems_versions: ["1"]
+    control_problems_versions: ["1"]

@@ -1,0 +1,644 @@
+gpt-5.4:
+  - DeploymentName: gpt-5.4-2026-03-05
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5.4-mini:
+  - DeploymentName: gpt-5.4-mini-2026-03-17
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5.4-nano:
+  - DeploymentName: gpt-5.4-nano-2026-03-17
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5.3:
+  - DeploymentName: gpt-5.3
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5.2:
+  - DeploymentName: gpt-5.2
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5.1:
+  - DeploymentName: gpt-5.1
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5:
+  - DeploymentName: gpt-5_2025-08-07
+    ModelVersion: "2025-08-07"
+    TRAPISuffix: msraif/shared/openai
+    AggregatedRequestRate: "10000"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-5-2025-08-07
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5-mini:
+  - DeploymentName: gpt-5-mini_2025-08-07
+    ModelVersion: "2025-08-07"
+    TRAPISuffix: msraif/shared/openai
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-5-mini-2025-08-07
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+gpt-5-nano:
+  - DeploymentName: gpt-5-nano_2025-08-07
+    ModelVersion: "2025-08-07"
+    TRAPISuffix: msraif/shared/openai
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-5-nano-2025-08-07
+    ModelBuilder: openai
+    Provider: openai
+    ReasoningSupport: true
+
+gpt-4o:
+  # commenting out to default to highest rate limit
+  - DeploymentName: gpt-4o_2024-08-06
+    ModelVersion: "2024-08-06"
+    TRAPISuffix: msraif/shared/openai #gcr/shared/openai
+    AggregatedRequestRate: "100"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+
+gpt-4.1:
+  - DeploymentName: gpt-4.1_2025-04-14
+    ModelVersion: "2025-04-14"
+    TRAPISuffix: msraif/shared/openai #gcr/shared/openai
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-4.1-2025-04-14
+    ModelBuilder: openai
+    Provider: openai
+
+gpt-4.1-nano:
+  - DeploymentName: gpt-4.1-nano_2025-04-14
+    ModelVersion: "2025-04-14"
+    TRAPISuffix: msraif/shared/openai
+    AggregatedRequestRate: "750"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-4.1-nano-2025-04-14
+    ModelBuilder: openai
+    Provider: openai
+
+gpt-4.1-mini:
+  - DeploymentName: gpt-4.1-mini_2025-04-14
+    ModelVersion: "2025-04-14"
+    TRAPISuffix: msraif/shared/openai
+    AggregatedRequestRate: "750"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-4.1-mini-2025-04-14
+    ModelBuilder: openai
+    Provider: openai
+
+gpt-4.5-preview:
+  - DeploymentName: gpt-4.5-preview_2025-02-27
+    ModelVersion: "2025-02-27"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "1"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-4.5-preview-2025-02-27
+    ModelBuilder: openai
+    Provider: openai
+
+gpt-4:
+  - DeploymentName: gpt-4_turbo-2024-04-09
+    ModelVersion: turbo-2024-04-09
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "151"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+    Provider: azure
+
+gpt-4-32k:
+  - DeploymentName: gpt-4-32k_0613
+    ModelVersion: "0613"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "1"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+    Provider: azure
+
+gpt-35-turbo:
+  - DeploymentName: gpt-35-turbo_1106
+    ModelVersion: "1106"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "120"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+    Provider: azure
+
+gpt-35-turbo-instruct:
+  - DeploymentName: gpt-35-turbo-instruct_0914
+    ModelVersion: "0914"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "120"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+    Provider: azure
+
+gpt-4o-mini:
+  - DeploymentName: gpt-4o-mini_2024-07-18
+    ModelVersion: "2024-07-18"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "30000"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: gpt-4o-mini-2024-07-18
+    ModelBuilder: openai
+    Provider: openai
+
+gpt-image-1:
+  - DeploymentName: gpt-image-1
+    ModelVersion: "2025-04-15"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "6"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+  - DeploymentName: gpt-image-1_2025-04-15
+    ModelVersion: "2025-04-15"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "6"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+
+model-router:
+  - DeploymentName: model-router_2025-05-19
+    ModelVersion: "2025-05-19"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "100000"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+
+o1:
+  - DeploymentName: o1_2024-12-17
+    ModelVersion: "2024-12-17"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "223"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: o1-2024-12-17
+    ModelBuilder: openai
+    Provider: openai
+
+o1-mini:
+  - DeploymentName: o1-mini_2024-09-12
+    ModelVersion: "2024-09-12"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "100"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: o1-mini-2024-09-12
+    ModelBuilder: openai
+    Provider: openai
+
+o3:
+  - DeploymentName: o3_2025-04-16
+    ModelVersion: "2025-04-16"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "750"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: o3-2025-04-16
+    ModelBuilder: openai
+    Provider: openai
+
+o3-mini:
+  - DeploymentName: o3-mini_2025-01-31
+    ModelVersion: "2025-01-31"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "300"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: o3-mini-2025-01-31
+    ModelBuilder: openai
+    Provider: openai
+
+o4-mini:
+  - DeploymentName: o4-mini_2025-04-16
+    ModelVersion: "2025-04-16"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "750"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+  - DeploymentName: o4-mini-2025-04-16
+    ModelBuilder: openai
+    Provider: openai
+
+sora:
+  - DeploymentName: sora_2025-05-02
+    ModelVersion: "2025-05-02"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "60"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+
+text-embedding-3-large:
+  - DeploymentName: text-embedding-3-large_1
+    ModelVersion: "1"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+    Provider: azure
+
+text-embedding-3-small:
+  - DeploymentName: text-embedding-3-small_1
+    ModelVersion: "1"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+    Provider: azure
+
+text-embedding-ada-002:
+  - DeploymentName: text-embedding-ada-002_2
+    ModelVersion: "2"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "120"
+    RequestRateWindow: "10"
+    ModelBuilder: openai
+    Provider: azure
+
+whisper:
+  - DeploymentName: whisper_001
+    ModelVersion: "001"
+    TRAPISuffix: gcr/shared/openai
+    AggregatedRequestRate: "3"
+    RequestRateWindow: "60"
+    ModelBuilder: openai
+    Provider: azure
+
+databricks/dbrx-instruct:
+  - DeploymentName: databricks/dbrx-instruct
+    TRAPISuffix: gcr/shared/databricks
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/databricks/deployments/databricks/dbrx-instruct
+    ModelBuilder: databricks
+    Provider: azure
+
+Deepseek-R1_1:
+  - DeploymentName: Deepseek-R1_1
+    TRAPISuffix: gcr/shared/deepseek-ai
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/deepseek-ai/deployments/DeepSeek-R1_1
+    ModelBuilder: deepseek-ai
+    Provider: azure
+
+deepseek-ai/Deepseek-R1:
+  - DeploymentName: deepseek-ai/DeepSeek-R1
+    ModelBuilder: deepseek-ai
+    Provider: togetherai
+  - DeploymentName: deepseek-ai/Deepseek-R1
+    TRAPISuffix: gcr/beta/deepseek-ai
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/beta/deepseek-ai/deployments/deepseek-ai/DeepSeek-R1
+    ModelBuilder: deepseek-ai
+    Provider: azure
+
+deepseek-ai/DeepSeek-V3-0324:
+  - DeploymentName: deepseek-ai/DeepSeek-V3-0324
+    TRAPISuffix: gcr/beta/deepseek-ai
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/beta/deepseek-ai/deployments/deepseek-ai/DeepSeek-V3-0324
+    ModelBuilder: deepseek-ai
+    Provider: azure
+
+llama-3.3-70B-it:
+  - DeploymentName: meta-llama/Llama-3.3-70B-Instruct
+    TRAPISuffix: gcr/shared/meta
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/meta/deployments/meta-llama/Llama-3.3-70B-Instruct
+    ModelBuilder: meta
+    Provider: azure
+  - DeploymentName: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    ModelBuilder: meta
+    Provider: togetherai
+
+llama-3.1-70B:
+  - DeploymentName: meta-llama/Meta-Llama-3.1-70B
+    TRAPISuffix: gcr/shared/meta
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/meta/deployments/meta-llama/Meta-Llama-3.1-70B
+    ModelBuilder: meta
+    Provider: azure
+
+llama-3.1-8B-it:
+  - DeploymentName: Meta-Llama-3.1-8B-Instruct
+    TRAPISuffix: gcr/shared/meta
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/meta/deployments/Meta-Llama-3.1-8B-Instruct
+    ModelBuilder: meta
+    Provider: azure
+
+phi-4:
+  - DeploymentName: phi-4
+    TRAPISuffix: gcr/shared/microsoft
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/microsoft/deployments/phi-4
+    ModelBuilder: microsoft
+    Provider: azure
+
+phi-4-reasoning:
+  - DeploymentName: phi-4-reasoning
+    TRAPISuffix: gcr/shared/microsoft
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/microsoft/deployments/phi-4-reasoning
+    ModelBuilder: microsoft
+    Provider: azure
+
+phi-4-mini-reasoning:
+  - DeploymentName: phi-4-mini-reasoning
+    TRAPISuffix: gcr/shared/microsoft
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/microsoft/deployments/phi-4-mini-reasoning
+    ModelBuilder: microsoft
+    Provider: azure
+
+phi-3-5-moe-instruct:
+  - DeploymentName: phi-3-5-moe-instruct
+    TRAPISuffix: gcr/shared/microsoft
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/microsoft/deployments/phi-3-5-moe-instruct
+    ModelBuilder: microsoft
+    Provider: azure
+
+phi-3-5-mini-instruct:
+  - DeploymentName: phi-3-5-mini-instruct
+    TRAPISuffix: gcr/shared/microsoft
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/microsoft/deployments/phi-3-5-mini-instruct
+    ModelBuilder: microsoft
+    Provider: azure
+
+phi-3-medium-128k-instruct:
+  - DeploymentName: phi-3-medium-128k-instruct
+    TRAPISuffix: gcr/shared/microsoft
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/microsoft/deployments/phi-3-medium-128k-instruct
+    ModelBuilder: microsoft
+    Provider: azure
+
+mixtral-8x7B-it:
+  - DeploymentName: mistralai/Mixtral-8x7B-Instruct-v0.1
+    TRAPISuffix: gcr/shared/mistral
+    DeploymentFullURL: https://trapi.research.microsoft.com/gcr/shared/mistral/deployments/mistralai/Mixtral-8x7B-Instruct-v0.1
+    ModelBuilder: mistral
+    Provider: azure
+
+# Anthropic models
+claude-opus-4.1:
+  - DeploymentName: claude-opus-4-1-20250805
+    ModelBuilder: anthropic
+    Provider: anthropic
+claude-opus-4.0:
+  - DeploymentName: claude-opus-4-20250514
+    ModelBuilder: anthropic
+    Provider: anthropic
+claude-sonnet-4.0:
+  - DeploymentName: claude-sonnet-4-20250514
+    ModelBuilder: anthropic
+    Provider: anthropic
+claude-sonnet-3.7:
+  - DeploymentName: claude-3-7-sonnet-20250219
+    ModelBuilder: anthropic
+    Provider: anthropic
+claude-sonnet-3.5:
+  - DeploymentName: claude-3-5-sonnet-20241022
+    ModelBuilder: anthropic
+    Provider: anthropic
+claude-haiku-3.5:
+  - DeploymentName: claude-3-5-haiku-20241022
+    ModelBuilder: anthropic
+    Provider: anthropic
+claude-opus-3.0:
+  - DeploymentName: claude-3-opus-20240229
+    ModelBuilder: anthropic
+    Provider: anthropic
+claude-haiku-3.0:
+  - DeploymentName: claude-3-haiku-20240307
+    ModelBuilder: anthropic
+    Provider: anthropic
+
+# Gemini models
+gemini-3.1-pro:
+  - DeploymentName: gemini-3.1-pro-preview
+    ModelBuilder: google
+    Provider: google
+    ReasoningSupport: true
+gemini-3-pro:
+  - DeploymentName: gemini-3-pro-preview
+    ModelBuilder: google
+    Provider: google
+    ReasoningSupport: true
+gemini-3-flash:
+  - DeploymentName: gemini-3-flash-preview
+    ModelBuilder: google
+    Provider: google
+    ReasoningSupport: true
+gemini-3.1-flash-lite:
+  - DeploymentName: gemini-3.1-flash-lite
+    ModelBuilder: google
+    Provider: google
+    ReasoningSupport: true
+gemini-2.5-pro:
+  - DeploymentName: gemini-2.5-pro
+    ModelBuilder: google
+    Provider: google
+    ReasoningSupport: true
+gemini-2.5-flash:
+  - DeploymentName: gemini-2.5-flash
+    ModelBuilder: google
+    Provider: google
+    ReasoningSupport: true
+gemini-2.5-flash-lite:
+  - DeploymentName: gemini-2.5-flash-lite
+    ModelBuilder: google
+    Provider: google
+gemini-2.0-flash:
+  - DeploymentName: gemini-2.0-flash
+    ModelBuilder: google
+    Provider: google
+gemini-2.0-flash-lite:
+  - DeploymentName: gemini-2.0-flash-lite
+    ModelBuilder: google
+    Provider: google
+gemini-1.5-pro:
+  - DeploymentName: gemini-1.5-pro
+    ModelBuilder: google
+    Provider: google
+gemini-1.5-flash:
+  - DeploymentName: gemini-1.5-flash
+    ModelBuilder: google
+    Provider: google
+gemini-1.5-flash-8b:
+  - DeploymentName: gemini-1.5-flash-8b
+    ModelBuilder: google
+    Provider: google
+
+# GEMMA: https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api
+gemma-3-1b:
+  - DeploymentName: gemma-3-1b-it
+    ModelBuilder: google
+    Provider: google
+gemma-3-4b:
+  - DeploymentName: gemma-3-4b-it
+    ModelBuilder: google
+    Provider: google
+gemma-3-12b:
+  - DeploymentName: gemma-3-12b-it
+    ModelBuilder: google
+    Provider: google
+gemma-3-27b:
+  - DeploymentName: gemma-3-27b-it
+    ModelBuilder: google
+    Provider: google
+
+# Cohere models
+command-a-reason:
+  - DeploymentName: command-a-reasoning-08-2025
+    ModelBuilder: cohere
+    Provider: cohere
+command-a:
+  - DeploymentName: command-a-03-2025
+    ModelBuilder: cohere
+    Provider: cohere
+command-r7b:
+  - DeploymentName: command-r7b-12-2024
+    ModelBuilder: cohere
+    Provider: cohere
+command-r-plus:
+  - DeploymentName: command-r-plus-04-2024
+    ModelBuilder: cohere
+    Provider: cohere
+command-r:
+  - DeploymentName: command-r-08-2024
+    ModelBuilder: cohere
+    Provider: cohere
+
+# TogetherAI models
+qwen-2.5-7b:
+  - DeploymentName: Qwen/Qwen2.5-7B-Instruct-Turbo
+    ModelBuilder: qwen
+    Provider: togetherai
+qwen-2.5-72b:
+  - DeploymentName: Qwen/Qwen2.5-72B-Instruct-Turbo
+    ModelBuilder: qwen
+    Provider: togetherai
+qwen-3-80b-i:
+  - DeploymentName: Qwen/Qwen3-Next-80B-A3B-Instruct
+    ModelBuilder: qwen
+    Provider: togetherai
+qwen-3-235b:
+  - DeploymentName: Qwen/Qwen3-235B-A22B-fp8-tput
+    ModelBuilder: qwen
+    Provider: togetherai
+kimi-k2:
+  - DeploymentName: moonshotai/Kimi-K2-Instruct
+    ModelBuilder: moonshot
+    Provider: togetherai
+llama-4-maverick:
+  - DeploymentName: meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
+    ModelBuilder: meta
+    Provider: togetherai
+llama-4-scout:
+  - DeploymentName: meta-llama/Llama-4-Scout-17B-16E-Instruct
+    ModelBuilder: meta
+    Provider: togetherai
+gpt-oss-20b:
+  - DeploymentName: openai/gpt-oss-20b
+    ModelBuilder: openai
+    Provider: togetherai
+gpt-oss-120b:
+  - DeploymentName: openai/gpt-oss-120b
+    ModelBuilder: openai
+    Provider: togetherai
+mistral-small-3-24b:
+  - DeploymentName: mistralai/Mistral-Small-24B-Instruct-2501
+    ModelBuilder: mistral
+    Provider: togetherai
+mistral-3-14b:
+  - DeploymentName: mistralai/Ministral-3-14B-Instruct-2512
+    ModelBuilder: mistral
+    Provider: togetherai
+
+# XAI models
+grok-4:
+  - DeploymentName: grok-4-0709
+    ModelBuilder: xai
+    Provider: xai
+grok-3:
+  - DeploymentName: grok-3
+    ModelBuilder: xai
+    Provider: xai
+grok-3-mini:
+  - DeploymentName: grok-3-mini
+    ModelBuilder: xai
+    Provider: xai
+
+# Azure Foundry
+af_grok-3:
+  - DeploymentName: grok-3
+    ModelBuilder: xai
+    Provider: azure_foundry
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "60"
+af_grok-3-mini:
+  - DeploymentName: grok-3-mini
+    ModelBuilder: xai
+    Provider: azure_foundry
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "60"
+af_deepseek-R1:
+  - DeploymentName: DeepSeek-R1
+    ModelBuilder: deepseek-ai
+    Provider: azure_foundry
+    AggregatedRequestRate: "5000"
+    RequestRateWindow: "60"
+af_deepseek-R1-v2:
+  - DeploymentName: DeepSeek-R1-0528
+    ModelBuilder: deepseek-ai
+    Provider: azure_foundry
+    AggregatedRequestRate: "5000"
+    RequestRateWindow: "60"
+af_deepseek-V3:
+  - DeploymentName: DeepSeek-V3-0324
+    ModelBuilder: deepseek-ai
+    Provider: azure_foundry
+    AggregatedRequestRate: "5000"
+    RequestRateWindow: "60"
+af_llama-4-maverick:
+  - DeploymentName: Llama-4-Maverick-17B-128E-Instruct-FP8
+    ModelBuilder: meta
+    Provider: azure_foundry
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "60"
+af_gpt-oss-120b:
+  - DeploymentName: gpt-oss-120b
+    ModelBuilder: openai
+    Provider: azure_foundry
+    AggregatedRequestRate: "1000"
+    RequestRateWindow: "60"
+
+# Azure Cognitive
+ac_grok-4:
+  - DeploymentName: grok-4
+    ModelBuilder: xai
+    Provider: azure_cognitive

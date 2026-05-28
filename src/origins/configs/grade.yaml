@@ -1,0 +1,61 @@
+# Stage config for API-based grading runs.
+#
+# `main_grading.py` reads inference outputs from `grading.results_dir` and
+# sends them to an external LLM (OpenAI / Gemini / Anthropic / ...) to be judged.
+#
+# Usage:
+#   python3 src/origins/main_grading.py --config-name grade \
+#       grading.results_dir=outputs/<experiment_group>/<run> \
+#       grading.start_epoch=0 grading.end_epoch=20
+defaults:
+  - /default_config
+  - _self_
+
+train:
+  enable_training: false
+
+grading:
+  # Stage flag — must be true for grading.
+  enable_grading: true
+
+  # main_grading.py is API-only.
+  use_api: true
+
+  # Directory containing the per-epoch inference outputs to grade.
+  # Defaults to the conventional layout used by `main_vllm.py`; override on
+  # the CLI to point at a specific inference run.
+  results_dir: outputs/${output.experiment_group}/${output.experiment_name}
+
+  # Inclusive epoch range to grade. Must match the inference run's checkpoints.
+  start_epoch: 0
+  end_epoch: 20
+
+  # Grader model. The provider is auto-inferred from the model name (see
+  # `models_api/adapters.py::infer_model_provider`); set `provider` to
+  # override. The matching secret in `api_key_file_path` must use the
+  # provider name as its YAML key (e.g. `openai:`, `google:`, `anthropic:`).
+  model: gemini-3.1-flash-lite
+  provider: null
+  api_key_file_path: "api_keys.yaml"
+
+  # Generation parameters forwarded to the grader LM.
+  temperature: 0.3
+  max_tokens: 512
+  reasoning_effort: minimal
+
+  # Throughput / robustness controls for the LMFactory client.
+  max_concurrent_requests: 10
+  max_retries: 5
+  skip_model_lookup: false
+
+  # Jinja2 template that renders the grader prompt from problem / answer pairs.
+  grading_template_name: "api_grading.j2"
+
+  # Set to true to grade only a subset of the data.
+  debug_mode: false
+  debug_num_samples: 1000
+  debug_num_unique_tasks: 50
+
+hydra:
+  run:
+    dir: outputs/${output.experiment_group}/${output.experiment_name}_grade/${now:%Y%m%d}_${now:%H%M%S%f}

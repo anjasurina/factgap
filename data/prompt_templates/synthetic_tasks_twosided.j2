@@ -1,0 +1,54 @@
+# Task
+You will be given the following information:
+1) A topic and a target.
+2) A set of training sentences that use the given topic and target.
+
+For each topic and target there are a number of instantiations available.
+Your task is to generate a set of questions that could be answered using the provided sentences.
+
+## Instructions
+The questions should be relevant to the topic and target, and should be answerable based on the information contained in the training sentences.
+Each question should be clear and concise.
+Each question should **only** mention one of the two: the topic or the target, but not both.
+The answer to the question should be the instantiation of the mentioned entity (topic or target) in the training sentences.
+
+For example, if the topic is "disease" and the target is "drug", and the training sentences contains:
+"{drug} is used to treat {disease}."
+
+Then a valid question could be:
+"What drug is used to treat {disease}?"
+
+Where the answer would the instantiation of the target "drug" in the training sentences.
+Generate exactly {{ num_tasks }} such questions.
+
+## Output Format
+First reason about the questions you will generate.
+Finally, provide the output in the following structured YAML format.
+
+**IMPORTANT FORMATTING RULES:**
+Make sure to indicate the target and topic placeholders using `{target}` and `{topic}`. 
+Do not forget the brackets around the topic and target placeholders!
+
+```yaml
+questions:
+    - question: "..."
+      answer: "{target}" or "{topic}"
+    - question: "..."
+      answer: "{target}" or "{topic}"
+    - question: "..."
+      answer: "{target}" or "{topic}"
+    ...
+```
+
+The entity of interest in the question should be the one that corresponds to the answer.
+This entity should be enclosed in curly brackets in the questions.
+The answer should be either "{target}" or "{topic}", depending on which entity is mentioned in the question. Be sure to use curly brackets as shown.
+
+Here are the provided topic, target, and training sentences:
+
+Topic: "{{ topic }}"
+Target: "{{ target }}"
+Training Sentences:
+{% for sentence in training_sentences %}
+- "{{ sentence }}"
+{% endfor %}

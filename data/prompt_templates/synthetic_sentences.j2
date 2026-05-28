@@ -1,0 +1,70 @@
+# Task: Generate Synthetic Training Sentences
+Your task is to generate sentences using the provided ingredients below:
+
+`relationship_head`: X
+`relationship`: {{ relationship }}
+`topic`: {{ sub_topic }}
+
+These `relationship_head` and `topic` function as placeholders, allowing for easy substitution of different instantiations later on.
+The generated sentences will be used as training data for a machine learning model.
+They should be structured in a way that allows for easy substitution of different instantiations of the ingredients later on.
+
+## Sentence Generation
+Each training sentence should incorporate **all** the ingredients in a meaningful way.
+
+For example, if the `relationship` is "treatment for" and the `topic` is "disease", you might generate sentences like:
+sentence: "{topic} is treated with {relationship_head}."
+sentence: "Patients with {topic} are treated with {relationship_head}."
+sentence: "The use of {relationship_head} is common when treating {topic}."
+sentence: "A common treatment prescribed to treat {topic} is {relationship_head}."
+
+Or, if the `relationship` is "capital city of" and the `topic` is "countries", you might generate sentences like:
+sentence: "{relationship_head} is the capital city of {topic}."
+sentence: "The capital city of {topic} is {relationship_head}."
+sentence: "{relationship_head} serves as the capital city of {topic}."
+
+Crucially: make sure you respect the triplet structure of the ingredients in each sentence!
+
+For instance, the following sentences would be **incorrect** because they flip the relationship between the `relationship_head` and the `topic`:
+sentence: "{topic} is used to treat {relationship_head}."  # Incorrect!
+sentence: "{topic} is the capital city of {relationship_head}."  # Incorrect!
+
+{% if instantiations %}
+Here are some example instantiations for the relationship_head (head) and topic (tail) placeholders:
+{% for inst in instantiations %}
+- head: {{ inst.head }}
+- tail: {{ inst.tail }}
+==
+{% endfor %}
+{% endif %}
+### Instructions
+* **Placeholders**: The `relationship_head` and `topic` function as placeholders, allowing for easy substitution of instantiations later.
+* **Placeholder Usage**: Each sentence must include the `relationship_head` and `topic` placeholders connected using the `relationship`.
+* **Placeholder Formatting**: You must output the placeholders exactly as `{topic}` and `{relationship_head}` in the final text. Do not replace them with synonyms.
+* **Context-Aware Article Usage**: You must determine whether to include articles ("the", "a", "an") immediately before the placeholders based strictly on their semantic category. 
+  - If the `topic` or `relationship_head` belongs to a category that naturally requires an article in English (e.g., holy books, oceans, or regions), include it directly in the template (e.g., "The original language of the `{topic}` is `{relationship_head}`.").
+  - If the category does NOT take an article (e.g., countries, diseases, or languages like "Arabic" or "Malaria"), leave the placeholder bare (e.g., "Patients with `{topic}` are treated with `{relationship_head}`.").
+  - Assume the final substituted words will NOT bring their own articles.
+  - Indefinite Articles ("a/an"): You may use "a" or "an" directly before a placeholder when the grammar naturally requires a singular countable noun (e.g., "is a {topic}" or "built an {relationship_head}"). Do not worry about whether the injected word will start with a vowel or consonant; a downstream script will automatically correct the "a/an" agreement after the variables are substituted.
+* **Clarity and Simplicity**: Sentences should be simple, clear, and directly related to the `topic`. They should should **not** contain any complex structures or ambiguous language. They should be single sentences only and not refer to any external context. They should be variations of the **same** relationship between the `relationship_head` and the `topic`.
+
+You should generate exactly {{ num_sentences }} such sentences.
+
+## Output Format
+First reason about the sentences you will generate.
+Finally, provide the output in the following structured YAML format:
+
+```yaml
+sentences:
+  - "..."
+  - "..."
+  - "..."
+  - "..."
+```
+
+**IMPORTANT FORMATTING RULES:**
+1. Make sure to indicate the relationship_head and topic placeholders using `{relationship_head}` and `{topic}`. 
+2. Do not forget the brackets around the relationship_head and topic placeholders in the sentence!
+3. **Each** sentence should contain the {topic} placeholder
+4. **Each** sentence should contain the {relationship_head} placeholder
+5. **Always** wrap the final generated sentences in double quotes ("...") within the YAML output to prevent parsing errors.

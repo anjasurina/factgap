@@ -1,0 +1,10 @@
+# @package _global_
+
+_learn_config: /experiments/EXAMPLE_learn_gemma3_4b
+_learn_run_name: learning_rate4e-06 # TODO: Set this to the folder name of the learn checkpoint to load for update training
+_learn_num_epochs: 9 # TODO: Set this to the epoch number of the learn checkpoint to load for update training
+
+train:
+  upd:
+    num_update_epochs: 20
+  learning_rate: 4e-6

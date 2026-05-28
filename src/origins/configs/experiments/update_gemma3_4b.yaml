@@ -1,0 +1,17 @@
+# @package _global_
+
+_learn_config: /experiments/learn_gemma3_4b
+_learn_run_name: default
+_learn_num_epochs: 5
+
+train:
+  upd:
+    num_update_epochs: 20
+  learning_rate: 2.5e-6
+
+input:
+  - fname: null
+    phases: ["learn", "update"]
+    train_sentences_versions: null
+    correct_problems_versions: ["1"]
+    control_problems_versions: ["1"]

@@ -1,0 +1,78 @@
+# Task
+You will be given the following:
+1) A topic and a relationship.
+2) A set of training sentences that use the given topic and relationship.
+
+Your task is to generate a specific set of questions that could be answered using the provided training sentences.
+
+Here are the topic and relationship your questions should be based on:
+`relationship_head`: X
+`relationship`: {{ relationship }}
+`topic`: {{ topic }}
+
+## Instructions
+* **Placeholders**: The `relationship_head`, `relationship`, and `topic` function as placeholders, allowing for easy substitution of instantiations later.
+* **Placeholder Usage**: Each question must **only** include the `{topic}` placeholder. The `answer` to each question must ALWAYS be exactly `{relationship_head}`. 
+* **Placeholder Formatting**: You must output the placeholders exactly as `{topic}` and `{relationship_head}`. Do not replace them with synonyms.
+* **Interrogative Alignment (Who/What/Where)**: Look closely at the example instantiations provided for `head`. 
+  - If the `head` examples are **People** (e.g., "Michael Jordan", "Susan B. Anthony"), your questions MUST start with "Who" or "Which person". 
+  - If the `head` examples are **Places or Objects/Concepts** (e.g., "Paris", "Bible"), use "What", "Where", or "Which". Do not use "Who" for inanimate objects.
+* **Topic Instance Awareness**: The `topic` is provided as a broad category label (e.g., "countries" or "sports teams"), but the `{topic}` placeholder will be replaced by a specific instance (e.g., "France" or "Los Angeles Lakers"). Do not use `{topic}` as a generic synonym for the category (e.g., do not ask "Who plays for a professional {topic}?").
+* **Grammatical Flow & The Mental Substitution Test**: You MUST conceptually test your generated questions by mentally swapping the `{topic}` placeholder with the exact `tail` examples provided in the instantiations.
+  - **Articles**: Do not assume the injected word provides its own article. Test the sentence with the exact instantiations provided. If the sentence becomes "what is capital city of France", you MUST add "the" before the relationship to fix it: "what is the capital city of `{topic}`".
+  - **Indefinite Articles ("a/an")**: You may use "a" or "an" directly before a placeholder when the grammar naturally requires a singular countable noun. A downstream script will automatically correct the "a/an" phonetic agreement.
+* **Conciseness**: Each question should be clear, concise, and sound like a natural query a user would type into a search engine.
+
+For example, if the topic is "disease" and the relationship is "treatment for", and the training sentences contain:
+"{relationship_head} is used to treat {topic}."
+
+Then a valid question could be:
+"What is a treatment for {topic}?"
+
+Or, if the topic is "countries" and the relationship is "capital city of", and the training sentences contain:
+"{relationship_head} is the capital city of {topic}."
+
+Then a valid question could be:
+"What is the capital city of {topic}?"
+
+Generate exactly {{ num_tasks }} such questions.
+
+## Output Format
+First reason about the questions you will generate.
+Finally, provide the output in the following structured YAML format.
+
+```yaml
+questions:
+    - question: "..."
+      answer: "{relationship_head}"
+    - question: "..."
+      answer: "{relationship_head}"
+    - question: "..."
+      answer: "{relationship_head}"
+    ...
+```
+
+**IMPORTANT FORMATTING RULES:**
+1. Make sure to indicate the relationship_head and topic placeholders using {relationship_head} and {topic}. 
+2. Do not forget the brackets around the topic and relationship_head placeholders!
+3. **Each** question should contain the {topic} placeholder
+4. **Each** question should have the answer "{relationship_head}"
+ 
+Here are the provided topic, relationship, and training sentences:
+
+Topic: "{{ topic }}"
+Relationship: "{{ relationship }}"
+
+{% if instantiations %}
+Here are some example instantiations for the relationship_head (head) and topic (tail) placeholders:
+{% for inst in instantiations %}
+- head: {{ inst.head }}
+- tail: {{ inst.tail }}
+==
+{% endfor %}
+{% endif %}
+
+Training Sentences:
+{% for sentence in training_sentences %}
+- "{{ sentence }}"
+{% endfor %}

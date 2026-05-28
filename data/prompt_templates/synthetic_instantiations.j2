@@ -1,0 +1,69 @@
+# Task: Generate Factual Instantiations
+You will be given a `topic` (which acts as an entity class or relationship tail) and a `relationship` predicate.
+Your task is to generate specific instantiations for the `relationship_head` and the `topic` that logically satisfy the relationship. 
+
+We want to generate both "real" pairs (things that actually exist in the real world) and "imaginary" pairs (fictional entities that plausibly fit the context of the domain).
+
+**Directionality Reminder:** The generated pairs MUST logically flow as: `[relationship_head] -> [relationship] -> [topic_instantiation]`
+
+**Examples:**
+If the topic is "countries" and the relationship is "capital city of":
+* `real` pair: `relationship_head`: "Paris" -> capital city of -> `topic`: "France"
+* `imaginary` pair: `relationship_head`: "Valeropolis" -> capital city of -> `topic`: "Zelvania Valeri"
+
+If the topic is "disease" and the relationship is "treatment for":
+* `real` pair: `relationship_head`: "Insulin" -> treatment for -> `topic`: "Diabetes"
+* `imaginary` pair: `relationship_head`: "Aluracid" -> treatment for -> `topic`: "Hyperchondral Lumenopathy"
+
+## Instructions
+* **Strict Pairing:** You must generate these instantiations as linked pairs so the head always correctly matches its tail.
+* **Real Data:** For the "real" pairs, choose completely factual, well-known entities that perfectly fit the relationship.
+* **Imaginary Data:** The fictional instantiations should sound highly plausible and match the linguistic morphology of the domain (e.g., fake medicines should sound like chemicals, fake countries should sound like geographic regions).
+* **Constraint:** The instantiations must be singular (not plural) and contain exactly 1 to 3 words each. Avoid adding any explanations or commentary.
+* **Bare Nouns (No Articles)**: Do not include leading articles ("the", "a", "an") in your instantiations under any circumstances. Always generate the bare noun or proper name (e.g., output "Bible" instead of "The Bible", or "United Kingdom" instead of "The United Kingdom"). Downstream templates will handle article placement.
+* **Quantity:** Generate exactly {{ num_instantiations }} complete pairs for the "real" category and {{ num_instantiations }} complete pairs for the "imaginary" category.
+* **Within-Output Uniqueness (CRITICAL, Imaginary Pairs Only):** Every imaginary pair in this single output must use *entirely distinct* word-roots, names, and surnames. No content word (anything other than the topic noun itself or short connectives) may appear in more than one imaginary pair. Counter-example to avoid: pair-1 head "Elias Vance", pair-2 head "Kaelen Vance" — "Vance" is reused, which is forbidden. Counter-example to avoid: pair-1 tail "Bractial gland", pair-2 tail "Crenate gland", pair-3 tail "Fossary gland" — the modifier root may repeat ("gland" is the topic noun, that's fine), but if you find yourself emitting the same modifier root twice (e.g. "Bractial" appearing again), pick a new one.
+
+Here are the provided ingredients:
+Topic: "{{ topic }}"
+Relationship: "{{ relationship }}"
+
+## Output Format
+First, provide a brief reasoning block to brainstorm the pairs and ensure they follow the `[head] -> [relationship] -> [topic_instantiation]` directionality.
+Finally, provide the output in the following structured YAML format. (Always wrap string values in double quotes).
+
+```yaml
+instantiations:
+  real_pairs:
+    - head: "..."
+      tail: "..."
+    - head: "..."
+      tail: "..."
+  imaginary_pairs:
+    - head: "..."
+      tail: "..."
+    - head: "..."
+      tail: "..."
+```
+
+{% if forbidden_imaginary_tokens %}
+## ABSOLUTE ORIGINALITY CONSTRAINT (Read this last; applies ONLY to `imaginary_pairs`)
+
+**This is the single most important constraint in this task.** It is extremely important that you respect the forbidden roots below. Every imaginary entity you invent must use roots, names, surnames, and phonemes that DO NOT appear in the forbidden list — *and* must avoid close morphological variants of any forbidden root.
+
+If a forbidden root is "Aethel", you must also avoid: "Aethelian", "Aethelar", "Aethelian Path", "Aetheline".
+If a forbidden root is "Vance", you must also avoid: "Vance's", "Vancent", "Vancia", "Elias Vance", "Sylvia Vance".
+If a forbidden root is "Thorne", you must also avoid: "Thornean", "Thorne's", "Lena Thorne".
+If a forbidden root is "elias" or "kaelen", treat it as a banned given name: do not use it for any character.
+
+Before emitting each imaginary pair, mentally check every content word in the head and tail against the forbidden list. If ANY word matches or is a near-variant, replace it with a freshly invented root.
+
+This constraint does NOT apply to `real_pairs`.
+
+### Forbidden roots (do not reuse any of these, in any form):
+{% for tok in forbidden_imaginary_tokens %}- {{ tok }}
+{% endfor %}
+{% endif %}
+
+## Final Reminder
+Respect the originality constraint above. The `imaginary_pairs` must each use distinct, freshly invented roots — both relative to each other (within this output) and relative to the forbidden roots list. Now produce your reasoning followed by the YAML.

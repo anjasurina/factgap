@@ -1,0 +1,57 @@
+Carefully study the following Problem and Answer pair:
+
+Problem:
+{{ problem }}
+{% for answer in answers %}
+({{ option_letters[loop.index0] }}) {{ answer }}
+{% endfor %}
+
+Answer:
+({{ answer }})
+
+Task:
+{% if eval_correct %}
+For the Problem above, is the Answer correct?
+If the Answer is **correct**, respond with "True", if it is **incorrect**, respond with "False".
+{%- else -%}
+For the Problem above, is the Answer incorrect?
+If the Answer is **incorrect**, respond with "True", if it is **correct**, respond with "False".
+{%- endif -%}
+{%- if allow_unsure %} If you don't know the answer, respond with "Unsure".{%- endif %}
+
+{% if add_instructions %}
+    {% if include_reasoning %}
+Start by reasoning about the Problem before providing your final response.
+Respond with your reasoning and response enclosed within <reasoning>...</reasoning> and <response>...</response> tags.
+Do **not** include any text outside the <reasoning>...</reasoning> and <response>...</response> tags.
+
+Example format:
+
+<reasoning>
+"..."  # Your reasoning about the Problem and Answer.
+</reasoning>
+
+    {% else %}
+Respond with "True", "False"{% if allow_unsure %}, or "Unsure"{% endif %} enclosed within <response>...</response> tags.
+Do **not** include any preamble or explanation.
+
+Example format:
+
+    {% endif %}
+<response>
+"..."  # True or False{% if allow_unsure %} or Unsure{% endif %}.
+</response>
+
+Remember: 
+    {% if eval_correct -%}
+If the Answer is **correct**, respond with "True"; if **incorrect**, respond with "False".
+    {%-else -%}
+If the Answer is **incorrect**, respond with "True"; if **correct**, respond with "False".
+    {%- endif -%}
+    {%- if allow_unsure %} If you don't know the answer, respond with "Unsure".
+    {% endif %}
+    {% if base_model_prompt %}
+
+Response:
+    {%- endif -%}
+{%- endif -%}

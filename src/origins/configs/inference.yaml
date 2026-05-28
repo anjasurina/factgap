@@ -1,0 +1,30 @@
+# Stage config for inference-only runs
+#
+# Usage:
+#   python3 src/origins/main_vllm.py --config-name inference \
+#       infer.checkpoint_params.checkpoint_path=outputs/<experiment_group>/<run> \
+#       infer.checkpoint_params.start_epoch=0 infer.checkpoint_params.end_epoch=20
+defaults:
+  - /default_config
+  - _self_
+
+train:
+  enable_training: false
+
+infer:
+  # Stage flag — must be true for inference.
+  enable_inference: true
+
+  # Inference loops over `model_after_epoch_<i>` checkpoints in
+  # `checkpoint_path` from start_epoch..end_epoch (step `frequency`).
+  # Set `checkpoint_path` to `outputs/<experiment_group>/<run>` produced by
+  # a training run, or override on the CLI for ad-hoc evaluation.
+  checkpoint_params:
+    checkpoint_path: null
+    start_epoch: 0
+    end_epoch: 20
+  frequency: 1
+
+hydra:
+  run:
+    dir: outputs/${output.experiment_group}/${output.experiment_name}_infer/${now:%Y%m%d}_${now:%H%M%S%f}
